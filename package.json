@@ -14,8 +14,8 @@
     "plug-pag",
     "plug pag"
   ],
-  "author": "",
-  "license": "",
+  "author": "Ítalo Menezes",
+  "license": "MIT",
   "peerDependencies": {
     "react-native": "^0.41.2"
   }
