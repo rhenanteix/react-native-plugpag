@@ -25,9 +25,9 @@ RCT_EXPORT_METHOD(requestAuthentication:(NSDictionary *)request resolver:(RCTPro
 {
     NSString *appName = [RCTConvert NSString:request[@"appName"]];
     NSString *appVersion = [RCTConvert NSString:request[@"appVersion"]];
-    
     dispatch_sync(dispatch_get_main_queue(), ^{
         UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+        
         [[PlugPag sharedInstance] plugPagAppIdentification:appName withVersion:appVersion];
         [[PlugPag sharedInstance] requestAuthentication:rootViewController];
     });
@@ -35,15 +35,15 @@ RCT_EXPORT_METHOD(requestAuthentication:(NSDictionary *)request resolver:(RCTPro
 
 RCT_EXPORT_METHOD(checkout:(NSDictionary *)request resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    PlugPagDevice *device = [PlugPagDevice new];
-    NSString *readerAddress = [RCTConvert NSString:request[@"readerAddress"]];
-    device.mPeripheralName = readerAddress;
-    
-    
     NSString *appName = [RCTConvert NSString:request[@"appName"]];
     NSString *appVersion = [RCTConvert NSString:request[@"appVersion"]];
     [[PlugPag sharedInstance] plugPagAppIdentification:appName withVersion:appVersion];
+    
+    PlugPagDevice *device = [PlugPagDevice new];
+    NSString *readerAddress = [RCTConvert NSString:request[@"readerAddress"]];
+    device.mPeripheralName = readerAddress;
     PlugPagTransactionResult *ret = [[PlugPag sharedInstance] setInitBTConnection:device];
+    
     if (ret.mResult == RET_OK) {
         NSString *total = [RCTConvert NSString:request[@"amount"]];
         NSString *totalAmount = [[total componentsSeparatedByCharactersInSet:

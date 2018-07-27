@@ -1,10 +1,11 @@
+//
+//#if __has_include("RCTBridgeModule.h")
+//#import "RCTBridgeModule.h"
+//#else
+//#import <React/RCTBridgeModule.h>
+//#endif
 
-#if __has_include("RCTBridgeModule.h")
-#import "RCTBridgeModule.h"
-#else
 #import <React/RCTBridgeModule.h>
-#endif
-
 #import <React/RCTConvert.h>
 #import "PlugpagLib/PlugPag.h"
 
