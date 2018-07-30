@@ -1,4 +1,4 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 const { RNPlugpag } = NativeModules;
 
@@ -20,6 +20,11 @@ export const RNPlugPag = {
   },
 
   setDeviceInfo(readerAddress) {
+    if (Platform.OS === 'ios' && readerAddress.includes('PAX')) {
+      console.error('Esta biblioteca ainda não suporta a MINIZINHA no iOS! :(');
+      return;
+    }
+
     this.readerAddress = readerAddress;
   },
 
